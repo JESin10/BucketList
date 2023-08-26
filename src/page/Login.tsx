@@ -14,7 +14,7 @@ export default function Login() {
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/");
+      navigate("/dashboard");
     }
   });
 
@@ -27,7 +27,7 @@ export default function Login() {
       if (emailRef.current && passwordRef.current) {
         await login(emailRef.current.value, passwordRef.current.value);
       }
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError("Fail to sign up");
     }
@@ -38,7 +38,7 @@ export default function Login() {
   const SignupWithGoogleHandler = () => {
     setLoading(true);
     signupWithGoogle();
-    navigate("/");
+    navigate("/dashboard");
     setLoading(false);
   };
 

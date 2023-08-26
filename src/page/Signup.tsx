@@ -14,7 +14,7 @@ export default function Signup() {
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/");
+      navigate("/dashboard");
     }
   });
 
@@ -40,7 +40,7 @@ export default function Signup() {
   const SignupWithGoogleHandler = () => {
     setLoading(true);
     signupWithGoogle();
-    navigate("/");
+    navigate("/dashboard");
     setLoading(false);
   };
 
