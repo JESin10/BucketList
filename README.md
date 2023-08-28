@@ -3,7 +3,9 @@
 23.08.26 - 23.08.
 
 <!--
-(🦋 포트폴리오 URL)[]
+(📚 BucketList URL)[]
+
+test-Account( test1@gmail.com / test1111 )
 
 
 ## 📌 서비스 소개
