@@ -3,14 +3,21 @@ import { useAuth } from "../context/AuthContext";
 import { firestore } from "../Firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { loadImg } from "../assets/images";
-import { QueryDocumentSnapshot } from "firebase/firestore";
+import {
+  QueryDocumentSnapshot,
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 export default function Dashboard() {
   useEffect(() => {
     console.log(currentUser);
   });
   const { currentUser } = useAuth();
-  const listRef = firestore.collection(`user/${currentUser?.uid}/list`);
+  const listRef = collection(firestore, `user/${currentUser?.uid}/list`);
   // const query = listRef.orderBy("createdAt");
   // const [list] = useCollectionData<any>(listRef, {
   //   IDField: "id",
@@ -22,7 +29,7 @@ export default function Dashboard() {
   const SubmitBucketHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (titleRef.current) {
-      listRef.add({
+      addDoc(listRef, {
         title: titleRef.current.value,
         completed: false,
         category: category,
@@ -32,12 +39,16 @@ export default function Dashboard() {
     }
   };
 
-  const BucketCompleteHandler = (id: string, completed: boolean) => {
-    listRef.doc(id).set({ completed: !completed }, { merge: true });
+  const BucketCompleteHandler = async (id: string, completed: boolean) => {
+    const docRef = doc(listRef, id);
+    // 문서를 업데이트하려면 setDoc 함수 사용
+    await setDoc(docRef, { completed: !completed }, { merge: true });
   };
 
-  const BucketDeleteHandler = (id: string) => {
-    listRef.doc(id).delete();
+  const BucketDeleteHandler = async (id: string) => {
+    const docRef = doc(listRef, id);
+    // 문서를 삭제하려면 deleteDoc 함수 사용
+    await deleteDoc(docRef);
   };
 
   return (

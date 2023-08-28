@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Navigate, RouteProps } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 // interface PrivateRouteProps extends RouteProps {

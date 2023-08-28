@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth, provider } from "../Firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+} from "firebase/auth";
+
+import { initializeApp } from "@firebase/app"; // Firebase 초기화를 위해 추가
 
 interface AuthContextProps {
   currentUser: any;
@@ -26,15 +33,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState<boolean>(true);
 
   const signup = (email: string, password: string) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email: string, password: string) => {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signupWithGoogle = async () => {
-    auth.signInWithRedirect(provider);
+    signInWithRedirect(auth, provider);
   };
 
   const logout = () => {

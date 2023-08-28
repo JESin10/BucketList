@@ -116,7 +116,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="md:w-8/12 my-10 mx-auto  bg-white rounded-xl bg-white m-4 flex md:flex-row flex-col-reverse items-center">
+      <div className="md:w-8/12 my-10 mx-auto  bg-white rounded-xl m-4 flex md:flex-row flex-col-reverse items-center">
         <div className="p-10">
           <h2 className="md:text-4xl text-3xl font-bold mb-4">
             How to create one?
