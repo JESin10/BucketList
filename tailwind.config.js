@@ -1,6 +1,11 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkmode: "class",
+  content: [
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx}',
+  ],  
+  darkmode: false,
   // main color setting 가능
   theme: {
     screens: {},
