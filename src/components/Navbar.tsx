@@ -26,7 +26,7 @@ export default function Navbar() {
         </div>
       </Link>
 
-      <Link to="/explore-ideas" className="mx-4 text-xl">
+      <Link to="/explore" className="mx-4 text-xl">
         <span className="mx-4 hover:text-yellow-400">✨ Explore ideas</span>
       </Link>
 
