@@ -50,7 +50,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <img src={loadImg.bucket} alt="hero" className="rounded w-6/12" />
+          <img
+            src={loadImg.bucket_color}
+            alt="hero"
+            className="rounded w-6/12"
+          />
           loadImg.bucket
         </div>
       </div>
@@ -96,7 +100,7 @@ export default function Home() {
 
       <div className="md:w-8/12 my-10 mx-auto  bg-white  rounded-xl flex items-center md:flex-row flex-col  ">
         <img
-          src={loadImg.bucket}
+          src={loadImg.bucket_color}
           className="md:w-1/3 rounded-xl"
           alt="illustration"
         />
@@ -128,7 +132,7 @@ export default function Home() {
           <p className="text-2xl mt-6">Don't limit yourself. </p>
         </div>
         <img
-          src={loadImg.bucket}
+          src={loadImg.bucket_color}
           className="md:w-1/3 rounded-xl"
           alt="illustration"
         />

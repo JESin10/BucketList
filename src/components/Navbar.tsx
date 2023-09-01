@@ -21,7 +21,11 @@ export default function Navbar() {
     <NavbarContainer>
       <Link to="/">
         <div className="flex items-center">
-          <img src={loadImg.bucket} alt="bucket" className="w-6 h-6 mx-2" />
+          <img
+            src={loadImg.bucket_color}
+            alt="bucket"
+            className="w-6 h-6 mx-2"
+          />
           <h1 className=" font-semibold ">Bucket</h1>
         </div>
       </Link>
