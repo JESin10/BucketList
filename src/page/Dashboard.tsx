@@ -1,51 +1,156 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { firestore } from "../Firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { loadImg } from "../assets/images";
 import {
   addDoc,
   collection,
   doc,
   setDoc,
   deleteDoc,
+  getFirestore,
+  query,
+  getDoc,
+  QuerySnapshot,
+  getDocs,
+  updateDoc,
+  collectionGroup,
+  where,
+  DocumentData,
 } from "firebase/firestore";
+import "firebase/compat/firestore";
+import { BsTrashFill } from "react-icons/bs";
+import tw from "tailwind-styled-components";
+import { v4 as uidv4 } from "uuid";
+import { IDOptions } from "react-firebase-hooks/firestore/dist/firestore/types";
 
 export default function Dashboard() {
-  useEffect(() => {
-    console.log(currentUser);
-  });
   const { currentUser } = useAuth();
   const listRef = collection(firestore, `user/${currentUser?.uid}/list`);
-  const [list] = useCollectionData<any>(listRef);
-
+  const [list] = useCollectionData<any>(listRef, {
+    idField: "id",
+  } as DocumentData);
   const titleRef = useRef<HTMLTextAreaElement | null>(null);
   const [category, setCategory] = useState<string>("");
   const [listCategory, setListCategory] = useState<string>("");
 
-  const SubmitBucketHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (titleRef.current) {
-      addDoc(listRef, {
-        title: titleRef.current.value,
-        completed: false,
-        category: category,
-      });
+  // const bucketId = uidv4();
+  // console.log(titleRef.current);
 
+  // const [list] = useCollectionData(listRef, {
+  //   idField: "id",
+  // } as IDOptions<DocumentData>);
+  // console.log(bucketId);
+  // const fetchBuckets = async (category: string) => {
+  //   const usersCollectionRef = collection(
+  //     firestore,
+  //     `user/${currentUser?.uid}/list`
+  //   );
+  //   const userSnap = await getDocs(usersCollectionRef);
+  //   const data = userSnap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  //   console.log(data);
+
+  //   return data;
+  // };
+
+  // const fetchBuckets = async () => {
+  //   try {
+  //     const q = query(collection(firestore, `user/${currentUser?.uid}/list`));
+  //     const querySnapshot = await getDocs(q);
+  //     const data = querySnapshot.docs.map((doc) => doc.data());
+  //     // const filteredData = data.filter(
+  //     //   (list) => list.category === listCategory
+  //     // );
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchBuckets();
+  // }, [category]);
+
+  const SubmitBucketHandler = (e: React.FormEvent) => {
+    // e.preventDefault();
+    // if (titleRef.current) {
+    //   addDoc(listRef, {
+    //     // id: bucketId,
+    //     title: titleRef.current.value,
+    //     completed: false,
+    //     category: category,
+    //   });
+    //   titleRef.current.value = "";
+    e.preventDefault();
+    addDoc(listRef, {
+      title: titleRef.current?.value,
+      completed: false,
+      category: category,
+    });
+
+    if (titleRef.current) {
       titleRef.current.value = "";
     }
   };
 
   const BucketCompleteHandler = async (id: string, completed: boolean) => {
-    const docRef = doc(listRef, id);
-    // 문서를 업데이트하려면 setDoc 함수 사용
-    await setDoc(docRef, { completed: !completed }, { merge: true });
+    // const docRef = doc(listRef, id);
+    // if (id) {
+    //   try {
+    //     await updateDoc(docRef, {
+    //       completed: !completed, // complete 값을 반전시킵니다.
+    //     });
+    //     console.log(`Document with ID ${id} updated successfully`);
+    //   } catch (error) {
+    //     console.error(`Error updating document: ${error}`);
+    //   }
+    // }
+    console.log(listRef);
+
+    // const docRef = doc(listRef, id); // 문서에 대한 참조 얻기
+    // setDoc(docRef, { completed: !completed }, { merge: true }); // 문서 업데이트
+    // if (!id) {
+    //   console.error("Invalid document ID");
+    //   return;
+    // }
+
+    const docRef = doc(listRef, id); // 문서에 대한 참조 얻기
+    if (id) {
+      try {
+        await setDoc(docRef, { completed: !completed }, { merge: true });
+        console.log(`Document with ID ${id} updated successfully`);
+      } catch (error) {
+        console.error(`Error updating document: ${error}`);
+      }
+    }
   };
 
   const BucketDeleteHandler = async (id: string) => {
-    const docRef = doc(listRef, id);
-    // 문서를 삭제하려면 deleteDoc 함수 사용
-    await deleteDoc(docRef);
+    // if (id) {
+    //   const docRef = doc(listRef, id);
+    //   try {
+    //     await deleteDoc(docRef);
+    //     console.log(`Document with ID ${id} deleted successfully`);
+    //   } catch (error) {
+    //     console.error(`Error deleting document: ${error}`);
+    //   }
+    // }
+    // console.log(list);
+    // const docRef = doc(listRef, id); // 문서에 대한 참조 얻기
+    // await deleteDoc(docRef); // 문서 삭제
+    if (!id) {
+      console.error("Invalid document ID");
+      return;
+    }
+
+    const docRef = doc(listRef, id); // 문서에 대한 참조 얻기
+
+    try {
+      await deleteDoc(docRef); // 문서 삭제
+      console.log(`Document with ID ${id} deleted successfully`);
+    } catch (error) {
+      console.error(`Error deleting document: ${error}`);
+    }
   };
 
   return (
@@ -98,10 +203,8 @@ export default function Dashboard() {
                 <option>Fun</option>
                 <option>Creative</option>
                 <option>Skills</option>
-                <option>Experience</option>
                 <option>Education</option>
-                <option>Personal</option>
-                <option>Challenge</option>
+                <option>Etc</option>
               </select>
 
               <button className="text-white text-xl font-semibold  bg-indigo-400 hover:bg-indigo-500 rounded p-2 mt-2">
@@ -113,94 +216,86 @@ export default function Dashboard() {
 
         <div className="md:px-10 py-4 md:w-8/12 ml-auto mr-2">
           <div className="bg-white p-4 rounded-xl shadow-sm flex md:flex-row flex-wrap text-center items-center justify-center">
-            <div
+            <CategoryBtn
               onClick={(e) => setListCategory("")}
               className="cursor-pointer flex flex-col bg-yellow-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">📑</span>
               <span className="text-sm font-semibold">All</span>
-            </div>
+            </CategoryBtn>
 
-            <div
+            <CategoryBtn
               onClick={(e) => setListCategory("Travel")}
               className="cursor-pointer flex flex-col bg-yellow-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">🏖</span>
               <span className="text-sm font-semibold">Travel</span>
-            </div>
+            </CategoryBtn>
 
-            <div
+            <CategoryBtn
+              className="bg-pink-100"
               onClick={(e) => setListCategory("Fun")}
-              className="cursor-pointer flex flex-col bg-pink-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">🎉</span>
               <span className="text-sm font-semibold">Fun</span>
-            </div>
+            </CategoryBtn>
 
-            <div
+            <CategoryBtn
               onClick={(e) => setListCategory("Adventure")}
-              className="cursor-pointer flex flex-col bg-red-100 p-2 rounded shadow-sm m-2 w-20"
+              className=" bg-red-100"
             >
               <span className="text-2xl">🏄‍♂️</span>
               <span className="text-sm font-semibold">Adventure</span>
-            </div>
+            </CategoryBtn>
 
-            <div
+            <CategoryBtn
               onClick={(e) => setListCategory("Creative")}
               className="cursor-pointer flex flex-col bg-indigo-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">🎨</span>
               <span className="text-sm font-semibold">Creative</span>
-            </div>
+            </CategoryBtn>
 
-            <div
+            <CategoryBtn
               onClick={(e) => setListCategory("Skills")}
               className="cursor-pointer flex flex-col bg-green-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">🤹</span>
               <span className="text-sm font-semibold">Skills</span>
-            </div>
+            </CategoryBtn>
 
-            <div
+            <CategoryBtn
               onClick={(e) => setListCategory("Education")}
               className="cursor-pointer flex flex-col bg-purple-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">🎓</span>
               <span className="text-sm font-semibold">Education</span>
-            </div>
+            </CategoryBtn>
 
-            <div
-              onClick={(e) => setListCategory("Personal")}
+            <CategoryBtn
+              onClick={(e) => setListCategory("Etc")}
               className="cursor-pointer flex flex-col bg-yellow-100 p-2 rounded shadow-sm m-2 w-20"
             >
               <span className="text-2xl">📙</span>
-              <span className="text-sm font-semibold">Personal</span>
-            </div>
+              <span className="text-sm font-semibold">Etc</span>
+            </CategoryBtn>
           </div>
 
           <div>
             <div className=" flex flex-col mt-4 mx-auto overflow-y-scroll md:h-96 ">
               {list &&
                 list
-                  .filter((wish) => {
+                  .filter((bucket) => {
                     if (listCategory === "") {
-                      return wish;
-                    } else if (
-                      wish.category
-                        .toLowerCase()
-                        .includes(listCategory.toLowerCase())
-                    ) {
-                      return wish;
-                    }
-                    return 0;
+                      return bucket;
+                    } else if (bucket.category === listCategory) return list;
                   })
-
-                  .map((wish) => {
+                  .map((bucket, index) => {
                     return (
                       <div
-                        key={wish.id}
+                        key={index}
                         className={`bg-white shadow-sm rounded-md md:mx-4 my-1 flex flex-row ${
-                          wish.completed === false
+                          bucket.completed === false
                             ? "border-green-50 "
                             : "border-red-50"
                         }`}
@@ -208,32 +303,32 @@ export default function Dashboard() {
                         <div className="p-2 px-6 flex items-center">
                           <input
                             type="checkbox"
-                            checked={wish.completed}
+                            defaultChecked={bucket.completed}
                             onClick={() =>
-                              BucketCompleteHandler(wish.id, wish.completed)
+                              BucketCompleteHandler(bucket.id, bucket.completed)
                             }
                             className="text-green-600  h-4 w-4 mr-6"
                           />
 
                           <h1
                             className={`text-xl font-semibold ${
-                              wish.completed === true
+                              bucket.completed === true
                                 ? "line-through text-gray-600"
                                 : ""
                             }`}
                           >
-                            {wish.title}
+                            {bucket.title}
                           </h1>
                         </div>
 
-                        <div className="ml-auto mr-2 flex flex-row items-center">
-                          <img
-                            src={loadImg.bucket}
-                            alt="delete"
-                            onClick={() => BucketDeleteHandler(wish.id)}
-                            className="bg-gray-50 hover:bg-pink-100 rounded-full p-1 w-8 h-8  mt-2 mb-auto cursor-pointer"
-                          />
-                        </div>
+                        <DeleteBtnContainer>
+                          <DeleteBtn
+                            className="delete"
+                            onClick={() => BucketDeleteHandler(bucket.id)}
+                          >
+                            <BsTrashFill />
+                          </DeleteBtn>
+                        </DeleteBtnContainer>
                       </div>
                     );
                   })}
@@ -245,3 +340,16 @@ export default function Dashboard() {
     // <></>
   );
 }
+
+const CategoryBtn = tw.div`
+cursor-pointer flex flex-col p-2 rounded shadow-sm m-2 w-20
+`;
+// width: ${(props) => props.Width};
+
+const DeleteBtn = tw.button`
+hover:text-red-500 p-1 w-8 h-8 mt-2 mb-auto cursor-pointer
+`;
+
+const DeleteBtnContainer = tw.div`
+ml-auto mr-2 flex flex-row items-center
+`;

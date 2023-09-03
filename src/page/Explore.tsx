@@ -66,7 +66,7 @@ export default function Explore() {
       // );
 
       const q = query(
-        collectionGroup(firestore, "list") // get 컬렉션 그룹
+        collection(firestore, "list") // get 컬렉션 그룹
         // where("category", "==", category) //필터링 조건
       );
 
