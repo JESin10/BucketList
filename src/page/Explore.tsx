@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { categories } from "../assets/utils";
-import {
-  collection,
-  collectionGroup,
-  getDocs,
-  query,
-  where,
-} from "@firebase/firestore";
-import { firestore } from "../Firebase";
+import { collection, collectionGroup, getDocs, query, where } from "@firebase/firestore";
+import { db } from "../Firebase";
 import { useAuth } from "../context/AuthContext";
 
 export default function Explore() {
@@ -16,7 +10,7 @@ export default function Explore() {
   const [buckets, setBuckets] = useState<any[]>([]);
 
   const { currentUser } = useAuth();
-  const dataRef = collection(firestore, `user/${currentUser?.uid}/list`);
+  const dataRef = collection(db, `user/${currentUser?.uid}/list`);
   // console.log(dataRef);
 
   // const fetchIdeas = async (category: string) => {
@@ -66,7 +60,7 @@ export default function Explore() {
       // );
 
       const q = query(
-        collection(firestore, "list") // get 컬렉션 그룹
+        collection(db, "list") // get 컬렉션 그룹
         // where("category", "==", category) //필터링 조건
       );
 
@@ -115,9 +109,7 @@ export default function Explore() {
       </div>
 
       <div>
-        <h1 className="text-6xl py-6 text-gray-800 font-bold text-center capitalize">
-          {tag}
-        </h1>
+        <h1 className="text-6xl py-6 text-gray-800 font-bold text-center capitalize">{tag}</h1>
       </div>
 
       <div className="flex flex-wrap justify-center md:w-10/12 mx-auto">
