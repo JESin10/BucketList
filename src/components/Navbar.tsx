@@ -3,7 +3,12 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { loadImg } from "../assets/images";
 import tw from "tailwind-styled-components";
-import { FaSignOutAlt, FaSignInAlt, FaRegCompass } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaSignInAlt,
+  FaRegCompass,
+  FaClipboardList,
+} from "react-icons/fa";
 
 export default function Navbar() {
   const { currentUser, logout } = useAuth();
@@ -33,7 +38,7 @@ export default function Navbar() {
 
       <Link to="/explore" className=" text-xl">
         <div className=" hover:text-Blue_No3 font-bold flex justify-center items-center">
-          <FaRegCompass className="mx-2"></FaRegCompass>
+          <FaRegCompass className="mx-2" />
           <span className="sm:hidden stom:hidden"> Explore Someone's</span>
           <span className="tolg:hidden sm:text-md stom:visibility">
             Explore
@@ -42,11 +47,14 @@ export default function Navbar() {
       </Link>
 
       {currentUser ? (
-        <div className="ml-auto flex flex-row">
+        <div className="ml-auto flex flex-row items-center">
           <DashBoardLink to="/dashboard">
-            <span>📚</span>
-            <span className="sm:hidden stom:hidden"> MyBoard</span>
+            <div className="flex justify-center items-center">
+              <FaClipboardList className="mx-2 w-6 h-auto" />
+              <span className="sm:hidden stom:hidden"> MyBoard</span>
+            </div>
           </DashBoardLink>
+
           <div className="flex flex-row">
             <LogoutBtn onClick={handleLogout}>
               <FaSignOutAlt className="w-6 h-auto" />
@@ -78,9 +86,9 @@ rounded font-semibold
 `;
 
 const DashBoardLink = tw(Link)`
-hover:text-Yellow_Light
+hover:text-Blue_No3
 ml-auto px-2 py-1 w-fit
-rounded font-semibold
+rounded font-bold
 `;
 
 const LoginLink = tw(Link)`

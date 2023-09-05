@@ -84,18 +84,18 @@ export default function Dashboard() {
             </p>
             <BucketCountContainer>
               <BucketCountDiv>
-                <span className="text-4xl stom:text-2xl font-bold mx-2 text-green-400">
+                <BucketCounter className="text-green-400">
                   {list &&
                     list.filter((wish) => wish.completed === false).length}
-                </span>
+                </BucketCounter>
                 <span className="sm:hidden">Remaining</span>
               </BucketCountDiv>
 
               <BucketCountDiv>
-                <span className="text-4xl stom:text-2xl  font-bold mx-2 text-red-400">
+                <BucketCounter className="text-red-400">
                   {list &&
                     list.filter((wish) => wish.completed === true).length}
-                </span>
+                </BucketCounter>
                 <span className="sm:hidden">Completed</span>
               </BucketCountDiv>
             </BucketCountContainer>
@@ -104,7 +104,7 @@ export default function Dashboard() {
                 required
                 placeholder="Tell me your Bucket List!"
                 ref={titleRef}
-                className="text-xl stom:text-sm w-full h-40  my-2 p-2 border rounded outline-none"
+                className="text-xl stom:text-sm w-full h-40 my-2 p-4 border rounded outline-none"
               />
 
               <select
@@ -122,10 +122,10 @@ export default function Dashboard() {
                 <option>Education</option>
                 <option>Etc</option>
               </select>
-              <SubmitBtn className="stom:hidden">
+              <SubmitBtn className="sm:hidden stom:hidden">
                 Add to my Bucket List
               </SubmitBtn>
-              <SubmitBtn className="stom:visible">Add</SubmitBtn>
+              <SubmitBtn className="tolg:hidden sm:visible">Add</SubmitBtn>
             </form>
           </BucketInputForm>
         </BucketInputContainer>
@@ -229,7 +229,7 @@ export default function Dashboard() {
                           <h1
                             className={`text-xl sm:text-sm font-semibold ${
                               bucket.completed === true
-                                ? "line-through text-gray-600"
+                                ? "line-through text-gray-400"
                                 : ""
                             }`}
                           >
@@ -282,7 +282,10 @@ px-10 pt-4
 const BucketCountDiv = tw.div`
 flex items-center border w-fit
 py-2 px-4 rounded-xl mx-1
+`;
 
+const BucketCounter = tw.span`
+text-4xl stom:text-2xl font-bold mx-2
 `;
 
 const SubmitBtn = tw.button`
@@ -296,8 +299,9 @@ md:px-10 stom:w-full
 w-2/3
 py-4 ml-auto mr-2
 `;
+
 const CategoryContainer = tw.div`
-bg-white 
+bg-white h-fit
 p-4 rounded-xl shadow-sm 
 flex flex-wrap text-center items-center justify-center
 md:flex-row 
@@ -305,9 +309,10 @@ md:flex-row
 
 const CategoryBtn = tw.div`
 cursor-pointer 
-flex flex-col rounded shadow-sm 
-p-2 m-2 w-32
+flex flex-col rounded shadow-sm items-center
+p-4 m-2 w-32 h-auto
 stom:w-16
+hover:border-Blue_No5 hover:border-solid hover:border-2
 `;
 // width: ${(props) => props.Width};
 
