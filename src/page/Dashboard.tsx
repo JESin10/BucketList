@@ -3,13 +3,13 @@ import { useAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
-  addDoc,
   collection,
   doc,
   deleteDoc,
   updateDoc,
   DocumentData,
   Query,
+  setDoc,
 } from "firebase/firestore";
 import { v4 as uidv4 } from "uuid";
 import "firebase/compat/firestore";
@@ -22,25 +22,21 @@ export default function Dashboard() {
   const titleRef = useRef<HTMLTextAreaElement | null>(null);
   const listRef = collection(db, `user/${currentUser?.uid}/list`);
   const [list] = useCollectionData<any>(listRef);
-  const collectionlist = useCollectionData<any>(listRef);
-
   const [category, setCategory] = useState<string>("");
   const [listCategory, setListCategory] = useState<string>("");
-
-  console.log(titleRef);
-  console.log(listRef.path);
-  console.log(collectionlist);
 
   const SubmitBucketHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     if (titleRef.current) {
-      const docRef = await addDoc(listRef, {
-        id: bucketId,
-        title: titleRef.current?.value,
-        completed: false,
-        category: category,
-      });
-      // console.log("Document written with ID: ", docRef.id);
+      const docRef = await setDoc(
+        doc(db, `user/${currentUser?.uid}/list`, bucketId),
+        {
+          id: bucketId,
+          title: titleRef.current?.value,
+          completed: false,
+          category: category,
+        }
+      );
       console.log(docRef);
 
       if (titleRef.current) {
@@ -50,8 +46,6 @@ export default function Dashboard() {
   };
 
   const BucketCompleteHandler = async (id: string, completed: boolean) => {
-    // const User = await getDocs(collection(db, "list"));
-    // console.log(User);
     if (id) {
       const docRef = doc(listRef, id);
       try {
@@ -77,7 +71,6 @@ export default function Dashboard() {
       }
     }
     console.log(id);
-    // deleteDoc(doc(db, "list", "6XzNRoSma9gPUGALW3tF"));
   };
 
   return (
@@ -85,26 +78,35 @@ export default function Dashboard() {
       <div className="flex md:flex-row ">
         <div className=" md:w-4/12 md:px-10 md:fixed mt-4 flex flex-col items-center">
           <div className="w-full shadow-sm bg-white  p-4   rounded-xl  ">
-            <h1 className="text-6xl text-center font-bold">{list && list.length}</h1>
-            <p className="text-xl text-center">Total goals in your bucket list.</p>
+            <h1 className="text-6xl text-center font-bold">
+              {list && list.length}
+            </h1>
+            <p className="text-xl text-center">
+              Total goals in your bucket list.
+            </p>
 
             <div className="flex items-center justify-center px-10 pt-4">
               <div className="flex items-center border p-2 px-4 rounded-xl mx-1">
                 <span className="text-3xl font-bold mx-2 text-green-400">
-                  {list && list.filter((wish) => wish.completed === false).length}
+                  {list &&
+                    list.filter((wish) => wish.completed === false).length}
                 </span>
                 <span>Remaining</span>
               </div>
 
               <div className="flex items-center  p-2 rounded-xl px-4 border mx-1">
                 <span className="text-3xl font-bold mx-2 text-red-400">
-                  {list && list.filter((wish) => wish.completed === true).length}
+                  {list &&
+                    list.filter((wish) => wish.completed === true).length}
                 </span>
                 <span>Completed</span>
               </div>
             </div>
 
-            <form onSubmit={SubmitBucketHandler} className="flex py-6 flex-col  ">
+            <form
+              onSubmit={SubmitBucketHandler}
+              className="flex py-6 flex-col  "
+            >
               <textarea
                 required
                 placeholder="What's something you always wanted to do?"
@@ -150,12 +152,18 @@ export default function Dashboard() {
               <span className="text-sm font-semibold">Travel</span>
             </CategoryBtn>
 
-            <CategoryBtn className="bg-pink-100" onClick={(e) => setListCategory("Fun")}>
+            <CategoryBtn
+              className="bg-pink-100"
+              onClick={(e) => setListCategory("Fun")}
+            >
               <span className="text-2xl">🎉</span>
               <span className="text-sm font-semibold">Fun</span>
             </CategoryBtn>
 
-            <CategoryBtn onClick={(e) => setListCategory("Adventure")} className=" bg-red-100">
+            <CategoryBtn
+              onClick={(e) => setListCategory("Adventure")}
+              className=" bg-red-100"
+            >
               <span className="text-2xl">🏄‍♂️</span>
               <span className="text-sm font-semibold">Adventure</span>
             </CategoryBtn>
@@ -207,20 +215,26 @@ export default function Dashboard() {
                       <div
                         key={index}
                         className={`bg-white shadow-sm rounded-md md:mx-4 my-1 flex flex-row ${
-                          bucket.completed === false ? "border-green-50 " : "border-red-50"
+                          bucket.completed === false
+                            ? "border-green-50 "
+                            : "border-red-50"
                         }`}
                       >
                         <div className="p-2 px-6 flex items-center">
                           <input
                             type="checkbox"
                             defaultChecked={bucket.completed}
-                            onClick={() => BucketCompleteHandler(bucket.id, bucket.completed)}
+                            onClick={() =>
+                              BucketCompleteHandler(bucket.id, bucket.completed)
+                            }
                             className="text-green-600 h-4 w-4 mr-6"
                           />
 
                           <h1
                             className={`text-xl font-semibold ${
-                              bucket.completed === true ? "line-through text-gray-600" : ""
+                              bucket.completed === true
+                                ? "line-through text-gray-600"
+                                : ""
                             }`}
                           >
                             {bucket.title}
