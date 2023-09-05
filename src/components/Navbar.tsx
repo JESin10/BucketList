@@ -26,41 +26,45 @@ export default function Navbar() {
             alt="bucket"
             className="w-6 h-6 mx-2"
           />
-          <h1 className=" font-semibold ">Bucket</h1>
+          <h1 className=" font-semibold ">BucketCheckit</h1>
         </div>
       </Link>
 
       <Link to="/explore" className="mx-4 text-xl">
-        <span className="mx-4 hover:text-yellow-400">✨ Explore ideas</span>
+        <span className="mx-4 hover:text-blue-600 font-bold">
+          🔎 Explore Someone's
+        </span>
       </Link>
 
       {currentUser ? (
         <div className="ml-auto md:mr-10">
-          <Link
-            to="/dashboard"
-            className="hover:text-yellow-400  mr-2 px-6 py-1 rounded  font-semibold "
-          >
-            dashboard
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="hover:text-yellow-400  mr-2 px-6 py-1 rounded font-semibold "
-          >
-            Log out
-          </button>
+          <Moveto to="/dashboard"> MyBoard</Moveto>
+          <LogoutBtn onClick={handleLogout}>👤 Log out</LogoutBtn>
         </div>
       ) : (
-        <Link
-          to="/login"
-          className="hover:text-yellow-400 ml-auto md:mr-10 mr-2 px-6 py-1 rounded  font-semibold "
-        >
-          Log in
-        </Link>
+        <Moveto to="/login">👤 Log in</Moveto>
       )}
     </NavbarContainer>
   );
 }
 
 const NavbarContainer = tw.div`
-bg-blue-100 md:w-10/12 mx-auto rounded-full shadow-sm text-xl p-4 flex flex-row items-center md:px-20
+bg-blue-100 
+md:px-20 md:w-10/12 
+mx-auto p-4
+rounded-full shadow-sm text-xl 
+flex flex-row items-center 
+`;
+
+const LogoutBtn = tw.button`
+hover:text-red-400 
+mr-2 px-6 py-1 
+rounded font-semibold
+`;
+
+const Moveto = tw(Link)`
+hover:text-yellow-500 
+ml-auto mr-2 px-6 py-1
+md:mr-10 
+rounded font-semibold
 `;
