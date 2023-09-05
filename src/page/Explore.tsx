@@ -75,15 +75,15 @@ export default function Explore() {
 }
 
 const CategoryDiv = tw.div`
-shadow-xl cursor-pointer 
+shadow-xl cursor-pointer
 flex flex-col items-center justify-center
-p-10 m-4 rounded-xl w-[1/5]
+p-10 m-4 rounded-xl w-1/5
 border-gray-100 bg-white 
 md:w-1/6 sm:w-1/12
 `;
 
 const CategoryContainer = tw.div`
-mx-auto py-4
+mx-auto py-4 
 flex flex-row justify-center flex-wrap
 md:w-10/12 md:flex-row 
 `;
@@ -91,14 +91,16 @@ md:w-10/12 md:flex-row
 const CategoryImg = tw.img`
 w-24 transform  duration-500
 hover:scale-110
+md:w-16 sm:w-10
 `;
 
 const CategoryTitle = tw.h1`
 text-2xl capitalize py-2
+md:
 `;
 
 const BucketListContainerDiv = tw.div`
-mx-auto 
+mx-auto
 flex flex-wrap justify-center 
 md:w-10/12 
 `;

@@ -25,7 +25,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
+              <Route
+                path="/dashboard"
+                element={<PrivateRoute element={<Dashboard />} />}
+              />
               {/* <Route path="/notfound" element={<NotFound />} />
         <Route path="/*" element={<NotFound />} /> */}
             </Routes>

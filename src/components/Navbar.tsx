@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { loadImg } from "../assets/images";
 import tw from "tailwind-styled-components";
+import { FaSignOutAlt, FaSignInAlt, FaRegCompass } from "react-icons/fa";
 
 export default function Navbar() {
   const { currentUser, logout } = useAuth();
@@ -20,51 +21,70 @@ export default function Navbar() {
   return (
     <NavbarContainer>
       <Link to="/">
-        <div className="flex items-center">
+        <div className="flex items-center mx-4">
           <img
-            src={loadImg.bucket_color}
+            src={loadImg.bucket_color_line}
             alt="bucket"
-            className="w-6 h-6 mx-2"
+            className="w-8 h-auto mx-2"
           />
-          <h1 className=" font-semibold ">BucketCheckit</h1>
+          <h1 className="text-2xl font-extrabold sm:text-xl">BucketCheckit</h1>
         </div>
       </Link>
 
-      <Link to="/explore" className="mx-4 text-xl">
-        <span className="mx-4 hover:text-blue-600 font-bold">
-          🔎 Explore Someone's
-        </span>
+      <Link to="/explore" className=" text-xl">
+        <div className=" hover:text-Blue_No3 font-bold flex justify-center items-center">
+          <FaRegCompass className="mx-2"></FaRegCompass>
+          <span className="sm:hidden stom:hidden"> Explore Someone's</span>
+          <span className="tolg:hidden sm:text-md stom:visibility">
+            Explore
+          </span>
+        </div>
       </Link>
 
       {currentUser ? (
-        <div className="ml-auto md:mr-10">
-          <Moveto to="/dashboard"> MyBoard</Moveto>
-          <LogoutBtn onClick={handleLogout}>👤 Log out</LogoutBtn>
+        <div className="ml-auto flex flex-row">
+          <DashBoardLink to="/dashboard">
+            <span>📚</span>
+            <span className="sm:hidden stom:hidden"> MyBoard</span>
+          </DashBoardLink>
+          <div className="flex flex-row">
+            <LogoutBtn onClick={handleLogout}>
+              <FaSignOutAlt className="w-6 h-auto" />
+            </LogoutBtn>
+          </div>
         </div>
       ) : (
-        <Moveto to="/login">👤 Log in</Moveto>
+        <LoginLink to="/login">
+          <FaSignInAlt className="w-6 h-auto" />
+        </LoginLink>
       )}
     </NavbarContainer>
   );
 }
 
 const NavbarContainer = tw.div`
-bg-blue-100 
-md:px-20 md:w-10/12 
-mx-auto p-4
+bg-Blue_No1
+md:px-10 md:w-10/12 
+mx-auto py-5 
 rounded-full shadow-sm text-xl 
-flex flex-row items-center 
+stom:text-lg
+flex flex-row items-center justify-between
 `;
 
 const LogoutBtn = tw.button`
-hover:text-red-400 
+hover:text-red-500 
 mr-2 px-6 py-1 
+rounded font-semibold 
+`;
+
+const DashBoardLink = tw(Link)`
+hover:text-Yellow_Light
+ml-auto px-2 py-1 w-fit
 rounded font-semibold
 `;
 
-const Moveto = tw(Link)`
-hover:text-yellow-500 
-ml-auto mr-2 px-6 py-1
-md:mr-10 
+const LoginLink = tw(Link)`
+hover:text-Yellow_Light
+ml-auto px-6 py-1
 rounded font-semibold
 `;

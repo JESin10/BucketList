@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { loadImg } from "../assets/images";
+import tw from "tailwind-styled-components";
 
 export default function Login() {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -27,6 +28,7 @@ export default function Login() {
         await login(emailRef.current.value, passwordRef.current.value);
       }
       navigate("/dashboard");
+      window.location.replace("/dashboard");
     } catch (err) {
       setError("Fail to sign up");
     }
@@ -43,55 +45,74 @@ export default function Login() {
 
   return (
     <div>
-      <div className="flex mt-4">
-        <div className=" text-center bg-white md:w-4/12 w-full mx-auto shadow-sm p-10 px-12  rounded-2xl">
-          <h2 className="text-2xl font-semibold mb-6">Welcome back!</h2>
+      <div className="flex mt-4 ">
+        <LoginFormDiv>
+          <h2 className="text-2xl font-semibold mb-6">
+            Welcome to BucketCheckit!
+          </h2>
           {error && <p className="p-2 bg-red-100 m-4 mx-20">{error}</p>}
           <form
             onSubmit={submitHandler}
             className="flex flex-col justify-center text-xl"
           >
-            <input
+            <LoginInput
               type="email"
               placeholder="Email"
               ref={emailRef}
-              className="border p-2 m-2 rounded"
-            ></input>
-            <input
+            ></LoginInput>
+            <LoginInput
               type="password"
               placeholder="Password"
               ref={passwordRef}
-              className="border p-2 m-2 rounded"
-            ></input>
-
-            <button
-              disabled={loading}
-              className="font-semibold px-5 py-2 mx-auto rounded-full w-1/2 m-2 bg-indigo-500 text-white"
-            >
-              Log In
-            </button>
-            <div></div>
+            ></LoginInput>
+            <LoginBtn>Log In</LoginBtn>
           </form>
 
-          <button
-            onClick={SignupWithGoogleHandler}
-            className="px-6 mx-auto border flex items-center justify-center shadow-sm rounded-full my-2 hover:bg-gray-100 p-2 text-xl"
-          >
+          <GoogleLoginBtn onClick={SignupWithGoogleHandler}>
             <img
               src={loadImg.googleLogo}
               className="mx-2 h-6 w-6"
               alt="google"
             />
-            Continue with google
-          </button>
+            <span className="sm:text-sm">Continue with google</span>
+          </GoogleLoginBtn>
           <h2>
             Need an account?{" "}
-            <Link to="/signup" className="text-yellow-300 font-semibold">
+            <Link
+              to="/signup"
+              className="text-Yellow_Bright hover:underline font-semibold"
+            >
               Sign Up
             </Link>
           </h2>
-        </div>
+        </LoginFormDiv>
       </div>
     </div>
   );
 }
+
+const LoginFormDiv = tw.div`
+text-center 
+bg-gray-100  
+sm:w-full 
+w-2/3 mx-auto shadow-sm my-10 py-10 px-12 rounded-2xl
+`;
+
+const LoginInput = tw.input`
+border p-2 m-2 rounded indent-2
+`;
+
+const GoogleLoginBtn = tw.button`
+px-6 mx-auto my-2 py-2 w-2/3
+border 
+flex items-center justify-center shadow-sm rounded-full  
+hover:bg-gray-100 bg-white
+text-xl
+`;
+
+const LoginBtn = tw.button`
+font-semibold 
+px-5 py-2 mx-auto w-2/3 my-2
+bg-Blue_No3 text-white
+rounded-full 
+`;

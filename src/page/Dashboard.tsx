@@ -76,43 +76,40 @@ export default function Dashboard() {
       <DashBoardPage>
         <BucketInputContainer>
           <BucketInputForm>
-            <h1 className="text-6xl text-center font-bold">
+            <h1 className="text-6xl text-center font-bold sm:text-4xl">
               {list && list.length}
             </h1>
-            <p className="text-xl text-center">
+            <p className="text-xl text-center stom:text-sm">
               Total goals in your bucket list.
             </p>
             <BucketCountContainer>
               <BucketCountDiv>
-                <span className="text-3xl font-bold mx-2 text-green-400">
+                <span className="text-4xl stom:text-2xl font-bold mx-2 text-green-400">
                   {list &&
                     list.filter((wish) => wish.completed === false).length}
                 </span>
-                <span>Remaining</span>
+                <span className="sm:hidden">Remaining</span>
               </BucketCountDiv>
 
               <BucketCountDiv>
-                <span className="text-3xl font-bold mx-2 text-red-400">
+                <span className="text-4xl stom:text-2xl  font-bold mx-2 text-red-400">
                   {list &&
                     list.filter((wish) => wish.completed === true).length}
                 </span>
-                <span>Completed</span>
+                <span className="sm:hidden">Completed</span>
               </BucketCountDiv>
             </BucketCountContainer>
-            <form
-              onSubmit={SubmitBucketHandler}
-              className="flex py-6 flex-col  "
-            >
+            <form onSubmit={SubmitBucketHandler} className="flex py-6 flex-col">
               <textarea
                 required
                 placeholder="Tell me your Bucket List!"
                 ref={titleRef}
-                className="text-xl w-full h-40  my-2 p-2 border rounded outline-none"
+                className="text-xl stom:text-sm w-full h-40  my-2 p-2 border rounded outline-none"
               />
 
               <select
                 onChange={(e) => setCategory(e.target.value)}
-                className="text-xl border p-2 rounded"
+                className="text-xl border p-2 rounded sm:text-sm"
               >
                 <option selected disabled hidden>
                   Choose Category
@@ -125,7 +122,10 @@ export default function Dashboard() {
                 <option>Education</option>
                 <option>Etc</option>
               </select>
-              <SubmitBtn>Add to my Bucket List</SubmitBtn>
+              <SubmitBtn className="stom:hidden">
+                Add to my Bucket List
+              </SubmitBtn>
+              <SubmitBtn className="stom:visible">Add</SubmitBtn>
             </form>
           </BucketInputForm>
         </BucketInputContainer>
@@ -227,7 +227,7 @@ export default function Dashboard() {
                           />
 
                           <h1
-                            className={`text-xl font-semibold ${
+                            className={`text-xl sm:text-sm font-semibold ${
                               bucket.completed === true
                                 ? "line-through text-gray-600"
                                 : ""
@@ -257,13 +257,14 @@ export default function Dashboard() {
 }
 
 const DashBoardPage = tw.div`
- flex 
- md:flex-row
+ flex w-full justify-between px-4
+ md:flex-row space-x-2
+ stom:flex-col
 `;
 
 const BucketInputContainer = tw.div`
-md:w-4/12 md:px-10 md:fixed 
-mt-4 
+stom:w-full md:px-10 
+mt-4 w-4/12
 flex flex-col items-center
 `;
 
@@ -274,23 +275,25 @@ bg-white
 `;
 
 const BucketCountContainer = tw.div`
-flex items-center justify-center 
-px-10 pt-4
+flex items-center justify-center
+px-10 pt-4 
 `;
 
 const BucketCountDiv = tw.div`
-flex items-center border 
+flex items-center border w-fit
 py-2 px-4 rounded-xl mx-1
+
 `;
 
 const SubmitBtn = tw.button`
-text-white bg-indigo-400 hover:bg-indigo-500
+text-white bg-Blue_No3 hover:bg-Blue_No4
 text-xl font-semibold rounded
 p-2 mt-2
 `;
 
 const MyBucketListContainer = tw.div`
-md:w-8/12 md:px-10
+md:px-10 stom:w-full
+w-2/3
 py-4 ml-auto mr-2
 `;
 const CategoryContainer = tw.div`
@@ -303,7 +306,8 @@ md:flex-row
 const CategoryBtn = tw.div`
 cursor-pointer 
 flex flex-col rounded shadow-sm 
-p-2 m-2 w-20
+p-2 m-2 w-32
+stom:w-16
 `;
 // width: ${(props) => props.Width};
 
@@ -313,6 +317,7 @@ text-2xl
 
 const CategoryTitle = tw.span`
 text-sm font-semibold
+stom:text-[10px]
 `;
 
 const BucketContainer = tw.div`

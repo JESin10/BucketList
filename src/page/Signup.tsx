@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { loadImg } from "../assets/images";
+import tw from "tailwind-styled-components/";
 
 export default function Signup() {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -47,60 +48,74 @@ export default function Signup() {
   return (
     <div>
       <div className="mt-4 flex items-center justify-center">
-        <div className="bg-white text-center w-full md:w-4/12 mx-auto p-10  shadow-sm rounded-2xl">
+        <SignUpFormDiv>
           <h2 className="text-2xl font-semibold mb-4">Create your account</h2>
           {error && <p className="p-2 bg-red-100 m-4 mx-20">{error}</p>}
           <form
             onSubmit={submitHandler}
             className="flex flex-col justify-center "
           >
-            <input
-              type="email"
-              placeholder="Email"
-              ref={emailRef}
-              className="text-xl border p-2 m-2 rounded"
-            />
-            <input
+            <SignUpInput type="email" placeholder="Email" ref={emailRef} />
+            <SignUpInput
               type="password"
               placeholder="Password"
               ref={passwordRef}
-              className="text-xl border p-2 m-2 rounded"
             />
-            <input
+            <SignUpInput
               type="password"
               placeholder="Confirm Password"
               ref={passwordConfirmRef}
-              className="text-xl border p-2 m-2 rounded"
             />
-            <button
-              disabled={loading}
-              className="px-5 text-xl font-semibold py-2 mx-auto rounded-full w-1/2 m-4 bg-indigo-500 text-white"
-            >
-              Sign up
-            </button>
+            <SignUpBtn>Sign up</SignUpBtn>
           </form>
 
-          <button
-            onClick={SignupWithGoogleHandler}
-            className="mx-auto px-6 border flex items-center justify-center shadow-sm rounded-full my-2 hover:bg-gray-100 p-2 text-xl"
-          >
+          <GoogleLoginBtn onClick={SignupWithGoogleHandler}>
             <img
               src={loadImg.googleLogo}
               className="mx-2 h-6 w-6"
               alt="google"
             />
             Continue with google
-          </button>
+          </GoogleLoginBtn>
           <div>
             <h2>
               Already a user?{" "}
-              <Link to="/login" className="text-yellow-400 font-semibold">
+              <Link
+                to="/login"
+                className="text-Yellow_Bright hover:underline font-semibold"
+              >
                 Log in
-              </Link>{" "}
+              </Link>
             </h2>
           </div>
-        </div>
+        </SignUpFormDiv>
       </div>
     </div>
   );
 }
+
+const SignUpFormDiv = tw.div`
+text-center 
+bg-gray-100  
+sm:w-full 
+w-2/3 mx-auto shadow-sm my-10 py-10 px-12 rounded-2xl
+`;
+
+const SignUpInput = tw.input`
+border p-2 m-2 rounded indent-2
+`;
+
+const GoogleLoginBtn = tw.button`
+px-6 mx-auto my-2 py-2 w-2/3
+border 
+flex items-center justify-center shadow-sm rounded-full  
+hover:bg-gray-100 bg-white
+text-xl
+`;
+
+const SignUpBtn = tw.button`
+font-semibold text-xl sm:text-lg
+px-5 py-2 mx-auto w-2/3 my-2
+bg-Blue_No3 text-white
+rounded-full 
+`;
