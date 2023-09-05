@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { categories } from "../assets/utils";
-import { collection, collectionGroup, getDocs, query, where } from "@firebase/firestore";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../Firebase";
 import { useAuth } from "../context/AuthContext";
+import tw from "tailwind-styled-components";
 
 export default function Explore() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -11,57 +12,13 @@ export default function Explore() {
 
   const { currentUser } = useAuth();
   const dataRef = collection(db, `user/${currentUser?.uid}/list`);
-  // console.log(dataRef);
 
-  // const fetchIdeas = async (category: string) => {
-  //   setTag(category);
-  //   const query = `
-  //   {
-  //     buckets(where: {category: {_eq: ${category}}}) {
-  //       id,
-  //       title
-  //     }
-  //   }`;
-
-  //   setLoading(true);
-  //   const response = await fetch(
-  //     "process.env.REACT_APP_FIREBASE_DATABASE_URL/user",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify({ query }),
-  //     }
-  //   );
-  //   const ApiResponse = await response.json();
-  //   setLoading(false);
-
-  //   setBuckets(ApiResponse.data.bucket);
-  //   window.scrollBy(0, 500);
-  // };
-
-  // const listRef = collection(firestore, `user/${uid}`);
-
-  // const fetchBuckets = async () => {
-  //   const usersCollectionRef = collection(firestore, "user");
-  //   const userSnap = await getDocs(usersCollectionRef);
-  //   const data = userSnap.docs.map((doc) => ({ ...doc.data() }));
-  //   console.log(data);
-
-  //   return data;
-  // };
   const fetchIdeas = async (category: string) => {
     setLoading(true);
     try {
-      // const q = query(
-      //   collection(firestore, `user/${currentUser?.uid}/list`),
-      //   where("category", "==", category)
-      // );
-
       const q = query(
-        collection(db, "list") // get 컬렉션 그룹
-        // where("category", "==", category) //필터링 조건
+        dataRef, // get 컬렉션 그룹
+        where("category", "==", category) //필터링 조건
       );
 
       const querySnapshot = await getDocs(q);
@@ -86,45 +43,77 @@ export default function Explore() {
 
   return (
     <div>
-      <div className="text-center mx-auto text-xl py-2 ">
-        {loading ? <span>Wait, I am thinking...</span> : <span></span>}
-      </div>
-      <div className="md:w-10/12 mx-auto flex md:flex-row flex-col justify-center py-4 flex-wrap">
+      {/* <div className="text-center mx-auto text-xl py-2 ">
+        {loading ? <span>Let me see...</span> : <span></span>}
+      </div> */}
+      <CategoryContainer>
         {categories.map((category) => {
           return (
-            <div
+            <CategoryDiv
               key={category.title}
-              className="shadow-xl cursor-pointer flex flex-col items-center justify-center border-gray-100 bg-white md:w-1/5 p-10 m-4 rounded-xl"
               onClick={() => fetchIdeas(category.title)}
             >
-              <img
-                src={category.img}
-                alt="category"
-                className="w-24 transform hover:scale-125 duration-300"
-              />
-              <h1 className="text-2xl capitalize py-2">{category.title}</h1>
-            </div>
+              <CategoryImg src={category.img} alt="category_img" />
+              <CategoryTitle>{category.title}</CategoryTitle>
+            </CategoryDiv>
           );
         })}
-      </div>
-
+      </CategoryContainer>
       <div>
-        <h1 className="text-6xl py-6 text-gray-800 font-bold text-center capitalize">{tag}</h1>
+        <BucketCategoryTitle>{tag}</BucketCategoryTitle>
       </div>
-
-      <div className="flex flex-wrap justify-center md:w-10/12 mx-auto">
+      <BucketListContainerDiv>
         {buckets &&
           buckets.map((bucket) => {
             return (
-              <div
-                key={bucket.id}
-                className="cursor-pointer text-center bg-white transform hover:scale-125 duration-500 px-8 shadow-sm rounded-xl p-4 text-gray-700 text-2xl m-4"
-              >
-                {bucket.title}
-              </div>
+              <BucketListDiv key={bucket.id}>{bucket.title}</BucketListDiv>
             );
           })}
-      </div>
+      </BucketListContainerDiv>
     </div>
   );
 }
+
+const CategoryDiv = tw.div`
+shadow-xl cursor-pointer 
+flex flex-col items-center justify-center
+p-10 m-4 rounded-xl w-[1/5]
+border-gray-100 bg-white 
+md:w-1/6 sm:w-1/12
+`;
+
+const CategoryContainer = tw.div`
+mx-auto py-4
+flex flex-row justify-center flex-wrap
+md:w-10/12 md:flex-row 
+`;
+
+const CategoryImg = tw.img`
+w-24 transform  duration-500
+hover:scale-110
+`;
+
+const CategoryTitle = tw.h1`
+text-2xl capitalize py-2
+`;
+
+const BucketListContainerDiv = tw.div`
+mx-auto 
+flex flex-wrap justify-center 
+md:w-10/12 
+`;
+
+const BucketListDiv = tw.div`
+cursor-pointer transform hover:scale-125 duration-500
+text-center text-2xl 
+px-8 py-4 m-4
+shadow-sm rounded-xl
+bg-red-400 text-gray-700 
+`;
+
+const BucketCategoryTitle = tw.h1`
+text-5xl font-bold 
+py-6
+text-center capitalize
+text-gray-800
+`;
