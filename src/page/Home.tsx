@@ -25,19 +25,10 @@ export default function Home() {
                 Create and track your bucket list
               </h1>
               <div className="my-6">
-                <h3 className="text-xl font-semibold py-2">
-                  I always wanted to
-                </h3>
+                <h3 className="text-xl font-semibold py-2">I always wanted to</h3>
                 <TypingText>
                   <Typical
-                    steps={[
-                      "Go to World Trip",
-                      3000,
-                      "Run a marathon",
-                      3000,
-                      "Write a Book",
-                      3000,
-                    ]}
+                    steps={["Go to World Trip", 3000, "Run a marathon", 3000, "Write a Book", 3000]}
                     loop={Infinity}
                     wrapper="p"
                   />
@@ -49,11 +40,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <img
-            src={loadImg.BackGroundImg_ver1}
-            alt="hero"
-            className="rounded w-3/4 stom:w-full"
-          />
+          <img src={loadImg.BackGroundImg_ver1} alt="hero" className="rounded w-3/4 stom:w-full" />
         </div>
       </div>
 
@@ -63,32 +50,18 @@ export default function Home() {
             It could be anything, no rules
           </h1>
           <SecondBannerContent>
-            It's a number of experiences or achievements that a person hopes to
-            have or accomplish during their lifetime.
+            It's a number of experiences or achievements that a person hopes to have or accomplish
+            during their lifetime.
           </SecondBannerContent>
         </div>
         <div className="flex flex-row flex-wrap w-5/6 m-4 mx-auto justify-center">
-          <span className="bg-indigo-100 rounded-full m-2 px-6 py-2 text-xl">
-            Activity
-          </span>
-          <span className="bg-pink-100 rounded-full m-2 px-6 py-2 text-xl">
-            Fun
-          </span>
-          <span className="bg-gray-100 rounded-full m-2 px-6 py-2 text-xl">
-            Creative
-          </span>
-          <span className="bg-purple-100 rounded-full m-2 px-6 py-2 text-xl">
-            Skills
-          </span>
-          <span className="bg-yellow-100 rounded-full m-2 px-6 py-2 text-xl">
-            Travel
-          </span>
-          <span className="bg-green-100 rounded-full m-2 px-6 py-2 text-xl">
-            Education
-          </span>
-          <span className="bg-red-100 rounded-full m-2 px-6 py-2 text-xl">
-            Etc
-          </span>
+          <span className="bg-indigo-100 rounded-full m-2 px-6 py-2 text-xl">Activity</span>
+          <span className="bg-pink-100 rounded-full m-2 px-6 py-2 text-xl">Fun</span>
+          <span className="bg-gray-100 rounded-full m-2 px-6 py-2 text-xl">Creative</span>
+          <span className="bg-purple-100 rounded-full m-2 px-6 py-2 text-xl">Skills</span>
+          <span className="bg-yellow-100 rounded-full m-2 px-6 py-2 text-xl">Travel</span>
+          <span className="bg-green-100 rounded-full m-2 px-6 py-2 text-xl">Education</span>
+          <span className="bg-red-100 rounded-full m-2 px-6 py-2 text-xl">Etc</span>
         </div>
       </div>
 
@@ -96,8 +69,8 @@ export default function Home() {
         <SecondBannerTextContainer>
           <SecondBannerTitle>Why create a bucket list?</SecondBannerTitle>
           <SecondBannerContent>
-            List and track your goals, wishes and childhood dreams. Do things
-            that you love and care about.
+            List and track your goals, wishes and childhood dreams. Do things that you love and care
+            about.
           </SecondBannerContent>
           <SecondBannerContent>
             Achieve your dreams and live your life to the fullest.
@@ -109,8 +82,8 @@ export default function Home() {
         <SecondBannerTextContainer>
           <SecondBannerTitle>How to create one?</SecondBannerTitle>
           <SecondBannerContent>
-            Start with the first things that come into your head when you ask
-            yourself, what's the thing that you always wanted to do.
+            Start with the first things that come into your head when you ask yourself, what's the
+            thing that you always wanted to do.
           </SecondBannerContent>
           <SecondBannerContent>Don't limit yourself. </SecondBannerContent>
         </SecondBannerTextContainer>
@@ -119,12 +92,11 @@ export default function Home() {
       <LastBanner>
         <SecondBannerTextContainer>
           <LastBannerTitle>
-            Imagine what would you do if you had unlimited time, money and
-            resources.
+            Imagine what would you do if you had unlimited time, money and resources.
           </LastBannerTitle>
 
           <Link to="/signup">
-            <StartBtn2>📃 Create my Bucket list now</StartBtn2>
+            <StartBtn2>📃 Create my Bucket List, Now!</StartBtn2>
           </Link>
         </SecondBannerTextContainer>
       </LastBanner>
@@ -185,5 +157,5 @@ bg-black text-white
 const StartBtn2 = tw.button`
 shadow-sm font-semibold text-2xl rounded-xl 
 px-8 py-4 mx-auto
-text-black bg-white
+text-black bg-white hover:bg-gray-100
 `;
