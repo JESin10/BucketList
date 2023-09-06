@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loadImg } from "../assets/images";
 import { useAuth } from "../context/AuthContext";
 import Typical from "react-typical";
+import tw from "tailwind-styled-components";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function Home() {
   });
 
   return (
-    <div className="">
+    <>
       <div className=" m-0 p-2">
         <div className="md:mx-40 md:my-10 rounded-xl bg-white shadow-sm  mx-auto  flex md:flex-row flex-col justify-center items-center">
           <div className="md:w-8/12 ">
@@ -27,139 +28,162 @@ export default function Home() {
                 <h3 className="text-xl font-semibold py-2">
                   I always wanted to
                 </h3>
-                <div className="text-2xl italic bg-yellow-100 p-2 px-6 rounded-full font-semibold  w-max ">
+                <TypingText>
                   <Typical
                     steps={[
-                      "Go on a treck",
+                      "Go to World Trip",
                       1000,
                       "Run a marathon",
                       1000,
-                      "Write a novel",
+                      "Write a Book",
                       1000,
                     ]}
                     loop={Infinity}
                     wrapper="p"
                   />
-                </div>
+                </TypingText>
               </div>
 
-              <Link to="signup">
-                <button className="mt-4 bg-indigo-400 hover:bg-indigo-500 font-semibold shadow  text-white rounded px-6 py-2 text-xl">
-                  Get Started
-                </button>
+              <Link to="/signup">
+                <StartBtn>Let's Start!</StartBtn>
               </Link>
             </div>
           </div>
           <img
-            src={loadImg.bucket_color}
+            src={loadImg.BackGroundImg_ver1}
             alt="hero"
-            className="rounded w-6/12"
+            className="rounded w-3/4 stom:w-full"
           />
-          loadImg.bucket
         </div>
       </div>
 
-      <div className="flex md:flex-row md:w-8/12 mx-auto flex-col items-center">
-        <div className="md:w-8/12 mx-auto">
+      <div className=" flex md:flex-row md:w-8/12 mx-auto flex-col items-center">
+        <div className="w-2/3 stom:w-3/4 text-center">
           <h1 className="text-center text-3xl font-semibold my-6 p-2">
             It could be anything, no rules
           </h1>
-          <p className="text-2xl italic text-center py-2 ">
+          <SecondBannerContent>
             It's a number of experiences or achievements that a person hopes to
             have or accomplish during their lifetime.
-          </p>
-
-          <div className="flex flex-row flex-wrap  m-4 mx-auto justify-center">
-            <span className="bg-indigo-100 rounded-full m-2 px-6 py-2 text-xl">
-              Adventure
-            </span>
-            <span className="bg-pink-100 rounded-full m-2 px-6 py-2 text-xl">
-              Fun
-            </span>
-            <span className="bg-gray-100 rounded-full m-2 px-6 py-2 text-xl">
-              Creativity
-            </span>
-            <span className="bg-purple-100 rounded-full m-2 px-6 py-2 text-xl">
-              Skills
-            </span>
-            <span className="bg-yellow-100 rounded-full m-2 px-6 py-2 text-xl">
-              Travel
-            </span>
-            <span className="bg-green-100 rounded-full m-2 px-6 py-2 text-xl">
-              Experiences
-            </span>
-            <span className="bg-red-100 rounded-full m-2 px-6 py-2 text-xl">
-              Personal
-            </span>
-            <span className="bg-blue-100 rounded-full m-2 px-6 py-2 text-xl">
-              Education
-            </span>
-          </div>
+          </SecondBannerContent>
+        </div>
+        <div className="flex flex-row flex-wrap w-5/6 m-4 mx-auto justify-center">
+          <span className="bg-indigo-100 rounded-full m-2 px-6 py-2 text-xl">
+            Activity
+          </span>
+          <span className="bg-pink-100 rounded-full m-2 px-6 py-2 text-xl">
+            Fun
+          </span>
+          <span className="bg-gray-100 rounded-full m-2 px-6 py-2 text-xl">
+            Creative
+          </span>
+          <span className="bg-purple-100 rounded-full m-2 px-6 py-2 text-xl">
+            Skills
+          </span>
+          <span className="bg-yellow-100 rounded-full m-2 px-6 py-2 text-xl">
+            Travel
+          </span>
+          <span className="bg-green-100 rounded-full m-2 px-6 py-2 text-xl">
+            Education
+          </span>
+          <span className="bg-red-100 rounded-full m-2 px-6 py-2 text-xl">
+            Etc
+          </span>
         </div>
       </div>
 
-      <div className="md:w-8/12 my-10 mx-auto  bg-white  rounded-xl flex items-center md:flex-row flex-col  ">
-        <img
-          src={loadImg.bucket_color}
-          className="md:w-1/3 rounded-xl"
-          alt="illustration"
-        />
-        <div className=" p-10">
-          <h2 className="md:text-4xl text-3xl font-bold mb-4">
-            Why create a bucket list?
-          </h2>
-          <div className="text-2xl">
-            <p>
-              List and track your goals, wishes and childhood dreams. Do things
-              that you love and care about.
-            </p>
-            <p className="mt-4">
-              Achieve your dreams and live your life to the fullest.
-            </p>
-          </div>
-        </div>
-      </div>
+      <SecondBannerContainer>
+        <SecondBannerTextContainer>
+          <SecondBannerTitle>Why create a bucket list?</SecondBannerTitle>
+          <SecondBannerContent>
+            List and track your goals, wishes and childhood dreams. Do things
+            that you love and care about.
+          </SecondBannerContent>
+          <SecondBannerContent>
+            Achieve your dreams and live your life to the fullest.
+          </SecondBannerContent>
+        </SecondBannerTextContainer>
+      </SecondBannerContainer>
 
-      <div className="md:w-8/12 my-10 mx-auto  bg-white rounded-xl m-4 flex md:flex-row flex-col-reverse items-center">
-        <div className="p-10">
-          <h2 className="md:text-4xl text-3xl font-bold mb-4">
-            How to create one?
-          </h2>
-          <p className="text-2xl">
+      <SecondBannerContainer>
+        <SecondBannerTextContainer>
+          <SecondBannerTitle>How to create one?</SecondBannerTitle>
+          <SecondBannerContent>
             Start with the first things that come into your head when you ask
             yourself, what's the thing that you always wanted to do.
-          </p>
-          <p className="text-2xl mt-6">Don't limit yourself. </p>
-        </div>
-        <img
-          src={loadImg.bucket_color}
-          className="md:w-1/3 rounded-xl"
-          alt="illustration"
-        />
-      </div>
+          </SecondBannerContent>
+          <SecondBannerContent>Don't limit yourself. </SecondBannerContent>
+        </SecondBannerTextContainer>
+      </SecondBannerContainer>
 
-      <div className="bg-indigo-400 md:w-8/12 mx-auto shadow-lg rounded-xl my-20 p-20 text-center">
-        <p className="text-4xl font-semibold pb-10  text-white">
-          Imagine what would you do if you had unlimited time, money and
-          resources.
-        </p>
+      <LastBanner>
+        <SecondBannerTextContainer>
+          <LastBannerTitle>
+            Imagine what would you do if you had unlimited time, money and
+            resources.
+          </LastBannerTitle>
 
-        <Link to="signup">
-          <button className="mx-auto bg-white shadow-sm  font-semibold text-2xl px-8 py-4 rounded-xl">
-            📃 Create my Bucket list now
-          </button>
-        </Link>
-      </div>
+          <Link to="/signup">
+            <StartBtn2>📃 Create my Bucket list now</StartBtn2>
+          </Link>
+        </SecondBannerTextContainer>
+      </LastBanner>
 
-      <footer className=" p-8 bottom-0">
-        <p className="font-semibold italic text-center">
-          Built with ❤ by
-          <a href="https://rutikwankhade.dev" className="text-indigo-400">
-            {" "}
-            Rutik Wankhade
-          </a>
-        </p>
-      </footer>
-    </div>
+      <Footer>
+        <p>© 2023. ShinEunJin. All rights reserved.</p>
+      </Footer>
+    </>
   );
 }
+
+const TypingText = tw.div`
+text-2xl italic
+bg-Yellow_Light
+py-2 px-6  w-max
+rounded-full font-semibold 
+`;
+
+const StartBtn = tw.button`
+mt-4 
+bg-Blue_No3 hover:bg-Blue_No4 text-white
+font-semibold shadow  
+ rounded px-6 py-2 text-xl
+`;
+
+const SecondBannerContainer = tw.div`
+bg-white
+md:w-2/3 my-8 mx-auto p-8
+flex md:flex-row flex-col-reverse
+`;
+
+const SecondBannerTextContainer = tw.div`
+w-3/5 mx-auto stom:w-4/5
+`;
+
+const SecondBannerTitle = tw.h1`
+md:text-4xl text-3xl font-bold mb-4
+`;
+
+const SecondBannerContent = tw.p`
+text-2xl mb-2
+`;
+
+const LastBanner = tw.div`
+bg-Blue_No2 text-white
+py-20 
+text-center 
+`;
+
+const LastBannerTitle = tw.p`
+text-4xl font-semibold pb-10`;
+
+const Footer = tw.footer`
+p-8 bottom-0 font-semibold italic text-center 
+bg-black text-white
+`;
+
+const StartBtn2 = tw.button`
+shadow-sm font-semibold text-2xl rounded-xl 
+px-8 py-4 mx-auto
+text-black bg-white
+`;
