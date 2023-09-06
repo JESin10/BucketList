@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext", "es2015", "es2016"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,14 +9,14 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "typeRoots": ["node_modules/@types", "custom_typings"], // 라이브러리 타입 선언 파일들이 있는 디렉토리를 추가
+    "types": ["duplexify"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
