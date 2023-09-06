@@ -75,11 +75,13 @@ export default function Explore() {
 }
 
 const CategoryDiv = tw.div`
-shadow-xl cursor-pointer
+cursor-pointer
 flex flex-col items-center justify-center
 p-10 m-4 rounded-xl w-1/5
-border-gray-100 bg-white 
-md:w-1/6 sm:w-1/12
+border-solid border-2 border-gray-200
+bg-white 
+md:w-1/6 sm:w-1/12 hover:shadow-md
+hover:border-Blue_No3
 `;
 
 const CategoryContainer = tw.div`
@@ -106,11 +108,11 @@ md:w-10/12
 `;
 
 const BucketListDiv = tw.div`
-cursor-pointer transform hover:scale-125 duration-500
+cursor-pointer transform hover:scale-[105%] duration-200
 text-center text-2xl 
 px-8 py-4 m-4
 shadow-sm rounded-xl
-bg-red-400 text-gray-700 
+bg-Blue_No1 text-gray-700 border-solid border-Blue_No5 border-2
 `;
 
 const BucketCategoryTitle = tw.h1`

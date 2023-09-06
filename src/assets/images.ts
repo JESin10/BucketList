@@ -4,4 +4,11 @@ export const loadImg = {
   bucket_line: "./images/bucket_line.svg",
   bucket_fill: "./images/bucket_fill.svg",
   googleLogo: "./images/GoogleLogo.svg",
+  Travel_icon: "./images/Travel.svg",
+  Activity_icon: "./images/Activity.svg",
+  Edu_icon: "./images/Edu.svg",
+  Fun_icon: "./images/Fun.svg",
+  Creative_icon: "./images/Creative.svg",
+  Skill_icon: "./images/Skill.svg",
+  Etc_icon: "./images/Etc.svg",
 };

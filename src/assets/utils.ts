@@ -1,11 +1,11 @@
 import { loadImg } from "./images";
 
 export const categories = [
-  { title: "Travel", img: loadImg.bucket_line },
-  { title: "Adventure", img: loadImg.bucket_line },
-  { title: "Fun", img: loadImg.bucket_line },
-  { title: "Creative", img: loadImg.bucket_line },
-  { title: "Experience", img: loadImg.bucket_line },
-  { title: "Education", img: loadImg.bucket_line },
-  { title: "Etc", img: loadImg.bucket_line },
+  { title: "Travel", img: loadImg.Travel_icon },
+  { title: "Activity", img: loadImg.Activity_icon },
+  { title: "Fun", img: loadImg.Fun_icon },
+  { title: "Creative", img: loadImg.Creative_icon },
+  { title: "Skills", img: loadImg.Skill_icon },
+  { title: "Education", img: loadImg.Edu_icon },
+  { title: "Etc", img: loadImg.Etc_icon },
 ];

@@ -115,7 +115,7 @@ export default function Dashboard() {
                   Choose Category
                 </option>
                 <option>Travel</option>
-                <option>Adventure</option>
+                <option>Activity</option>
                 <option>Fun</option>
                 <option>Creative</option>
                 <option>Skills</option>
@@ -157,11 +157,11 @@ export default function Dashboard() {
             </CategoryBtn>
 
             <CategoryBtn
-              onClick={(e) => setListCategory("Adventure")}
+              onClick={(e) => setListCategory("Activity")}
               className=" bg-red-100"
             >
               <CategoryIcon>🏄‍♂️</CategoryIcon>
-              <CategoryTitle>Adventure</CategoryTitle>
+              <CategoryTitle>Activity</CategoryTitle>
             </CategoryBtn>
 
             <CategoryBtn
@@ -312,6 +312,7 @@ cursor-pointer
 flex flex-col rounded shadow-sm items-center
 p-4 m-2 w-32 h-auto
 stom:w-16
+border-2 border-transparent
 hover:border-Blue_No5 hover:border-solid hover:border-2
 `;
 // width: ${(props) => props.Width};
