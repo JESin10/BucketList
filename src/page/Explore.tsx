@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { categories } from "../assets/utils";
-import { collection, getDocs, query, where } from "@firebase/firestore";
+import {
+  Firestore,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "@firebase/firestore";
 import { db } from "../Firebase";
 import { useAuth } from "../context/AuthContext";
 import tw from "tailwind-styled-components";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function Explore() {
   const [loading, setLoading] = useState<boolean>(false);
   const [tag, setTag] = useState<string>("");
   const [buckets, setBuckets] = useState<any[]>([]);
-
   const { currentUser } = useAuth();
-  const dataRef = collection(db, `user/${currentUser?.uid}/list`);
+  const dataRef = collection(db, "AllList");
 
   const fetchIdeas = async (category: string) => {
     setLoading(true);
@@ -21,9 +27,8 @@ export default function Explore() {
         where("category", "==", category) //필터링 조건
       );
 
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(dataRef);
       const data = querySnapshot.docs.map((doc) => doc.data());
-      console.log(data);
       const filteredData = data.filter((list) => list.category === category);
 
       setBuckets(filteredData);
@@ -31,7 +36,6 @@ export default function Explore() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-
     setLoading(false);
   };
 

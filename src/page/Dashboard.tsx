@@ -8,6 +8,7 @@ import {
   deleteDoc,
   updateDoc,
   setDoc,
+  addDoc,
 } from "firebase/firestore";
 import { v4 as uidv4 } from "uuid";
 import "firebase/compat/firestore";
@@ -17,15 +18,26 @@ import tw from "tailwind-styled-components";
 export default function Dashboard() {
   const { currentUser } = useAuth();
   const bucketId = uidv4();
+  const ListId = uidv4();
   const titleRef = useRef<HTMLTextAreaElement | null>(null);
   const listRef = collection(db, `user/${currentUser?.uid}/list`);
   const [list] = useCollectionData<any>(listRef);
   const [category, setCategory] = useState<string>("");
   const [listCategory, setListCategory] = useState<string>("");
 
+  const AllListRef = collection(db, "AllList");
+  const [all] = useCollectionData<any>(AllListRef);
+
   const SubmitBucketHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (titleRef.current) {
+      const AllRef = await setDoc(doc(db, "AllList", bucketId), {
+        id: bucketId,
+        title: titleRef.current?.value,
+        category: category,
+      });
+
       const docRef = await setDoc(
         doc(db, `user/${currentUser?.uid}/list`, bucketId),
         {
@@ -35,7 +47,6 @@ export default function Dashboard() {
           category: category,
         }
       );
-      console.log(docRef);
 
       if (titleRef.current) {
         titleRef.current.value = "";
@@ -50,7 +61,7 @@ export default function Dashboard() {
         await updateDoc(docRef, {
           completed: !completed, // complete 값을 반전시킵니다.
         });
-        console.log(`Document with ID ${id} updated successfully`);
+        console.log(`Document updated successfully`);
       } catch (error) {
         console.error(`Error updating document: ${error}`);
       }
@@ -59,17 +70,20 @@ export default function Dashboard() {
 
   const BucketDeleteHandler = async (id: string) => {
     const docRef = doc(listRef, id);
+    const allRef = doc(AllListRef, id);
+
     if (id) {
       try {
         await deleteDoc(docRef);
-
-        console.log(`Document with ID ${id} deleted successfully`);
+        await deleteDoc(allRef);
+        console.log(`Document deleted successfully`);
       } catch (error) {
         console.error(`Error deleting document: ${error}`);
       }
     }
-    console.log(id);
   };
+
+  console.log(list);
 
   return (
     <>
@@ -219,6 +233,7 @@ export default function Dashboard() {
                         <BucketTitle>
                           <input
                             type="checkbox"
+                            key={`checkbox-${bucket.id}`}
                             defaultChecked={bucket.completed}
                             onClick={() =>
                               BucketCompleteHandler(bucket.id, bucket.completed)
