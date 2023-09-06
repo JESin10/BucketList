@@ -47,41 +47,21 @@ export default function Login() {
     <div>
       <div className="flex mt-4 ">
         <LoginFormDiv>
-          <h2 className="text-2xl font-semibold mb-6">
-            Welcome to BucketCheckit!
-          </h2>
+          <h2 className="text-2xl font-semibold mb-6">Welcome to BucketCheckit!</h2>
           {error && <p className="p-2 bg-red-100 m-4 mx-20">{error}</p>}
-          <form
-            onSubmit={submitHandler}
-            className="flex flex-col justify-center text-xl"
-          >
-            <LoginInput
-              type="email"
-              placeholder="Email"
-              ref={emailRef}
-            ></LoginInput>
-            <LoginInput
-              type="password"
-              placeholder="Password"
-              ref={passwordRef}
-            ></LoginInput>
+          <form onSubmit={submitHandler} className="flex flex-col justify-center text-xl">
+            <LoginInput type="email" placeholder="Email" ref={emailRef}></LoginInput>
+            <LoginInput type="password" placeholder="Password" ref={passwordRef}></LoginInput>
             <LoginBtn>Log In</LoginBtn>
           </form>
 
           <GoogleLoginBtn onClick={SignupWithGoogleHandler}>
-            <img
-              src={loadImg.googleLogo}
-              className="mx-2 h-6 w-6"
-              alt="google"
-            />
+            <img src={loadImg.googleLogo} className="mx-2 h-6 w-6" alt="google" />
             <span className="sm:text-sm">Continue with google</span>
           </GoogleLoginBtn>
           <h2>
             Need an account?{" "}
-            <Link
-              to="/signup"
-              className="text-Yellow_Bright hover:underline font-semibold"
-            >
+            <Link to="/signup" className="text-Yellow_Bright hover:underline font-semibold">
               Sign Up
             </Link>
           </h2>
@@ -95,11 +75,11 @@ const LoginFormDiv = tw.div`
 text-center 
 bg-gray-100  
 sm:w-full 
-w-2/3 mx-auto shadow-sm my-10 py-10 px-12 rounded-2xl
+w-1/2 mx-auto shadow-sm my-10 py-10 rounded-2xl
 `;
 
 const LoginInput = tw.input`
-border p-2 m-2 rounded indent-2
+border p-2 m-2 rounded indent-2 w-2/3 mx-auto
 `;
 
 const GoogleLoginBtn = tw.button`
