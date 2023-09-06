@@ -19,7 +19,7 @@ export default function Home() {
     <>
       <div className=" m-0 p-2">
         <div className="md:mx-40 md:my-10 rounded-xl bg-white shadow-sm  mx-auto  flex md:flex-row flex-col justify-center items-center">
-          <div className="md:w-8/12 ">
+          <div className="md:w-8/12">
             <div className="p-12">
               <h1 className="mt-4 text-5xl text-gray-800 font-bold">
                 Create and track your bucket list
@@ -32,11 +32,11 @@ export default function Home() {
                   <Typical
                     steps={[
                       "Go to World Trip",
-                      1000,
+                      3000,
                       "Run a marathon",
-                      1000,
+                      3000,
                       "Write a Book",
-                      1000,
+                      3000,
                     ]}
                     loop={Infinity}
                     wrapper="p"

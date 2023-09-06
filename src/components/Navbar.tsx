@@ -72,9 +72,9 @@ export default function Navbar() {
 
 const NavbarContainer = tw.div`
 bg-Blue_No1
-md:px-10 md:w-10/12 
+md:px-10
 mx-auto py-5 
-rounded-full shadow-sm text-xl 
+rounded-t-3xl shadow-sm text-xl 
 stom:text-lg
 flex flex-row items-center justify-between
 `;
