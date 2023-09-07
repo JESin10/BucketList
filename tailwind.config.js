@@ -24,7 +24,9 @@ module.exports = {
         Blue_No5: "#011f4b",
         Yellow_Light: "#ffdf7f",
         Yellow_Bright: "#ffbf00",
+        Orange_Bright: "rgb(230, 132, 84)",
       },
+
       spacing: {},
     },
   },

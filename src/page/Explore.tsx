@@ -47,9 +47,6 @@ export default function Explore() {
 
   return (
     <div>
-      {/* <div className="text-center mx-auto text-xl py-2 ">
-        {loading ? <span>Let me see...</span> : <span></span>}
-      </div> */}
       <CategoryContainer>
         {categories.map((category) => {
           return (

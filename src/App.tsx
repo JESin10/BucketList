@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Loading from "./page/Loading";
 import Home from "./page/Home";
+import Error from "./page/Error";
 
 const Signup = lazy(() => import("./page/Signup"));
 const Login = lazy(() => import("./page/Login"));
@@ -29,8 +30,8 @@ function App() {
                 path="/dashboard"
                 element={<PrivateRoute element={<Dashboard />} />}
               />
-              {/* <Route path="/notfound" element={<NotFound />} />
-        <Route path="/*" element={<NotFound />} /> */}
+              <Route path="/notfound" element={<Error />} />
+              <Route path="/*" element={<Error />} />
             </Routes>
           </Suspense>
         </AuthProvider>
