@@ -15,4 +15,7 @@ export const loadImg = {
 
   BackGroundImg_ver1: "./images/bg_1.svg",
   BackGroundImg_ver2: "./images/bg_2.svg",
+
+  LoadingSpinner: "./images/LoadSpinner.gif",
+  ErrorImg: "./images/ErrorImg.svg",
 };
