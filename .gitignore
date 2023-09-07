@@ -24,6 +24,5 @@ yarn-error.log*
 
 .github
 .firebase
-.env
 /functions
 
