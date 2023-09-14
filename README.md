@@ -4,7 +4,7 @@
 
 링크바로가기 : <https://bucketcheckit.vercel.app>
 
-<details><summary> test-Account </summary> 
+<details><summary> test-account </summary> 
  ID : test1@gmail.com
  
  PW: test1111 
@@ -28,12 +28,12 @@ Database : Firebase
 
 ## 📌 서비스 페이지 예시
 
-<img width="400" alt="main" src="https://github.com/JESin10/BucketList/assets/119720123/35357c84-130d-43b4-afe4-fb74fde73215">
-<img width="400" alt="main_2" src="https://github.com/JESin10/BucketList/assets/119720123/36203109-edf0-4bf8-ad52-1255f318632e">
-<img width="400" alt="Dashboard_all" src="https://github.com/JESin10/BucketList/assets/119720123/7dd22b21-44b9-43ad-ae23-c2649e2730bc">
-<img width="400" alt="Dashboard_tr" src="https://github.com/JESin10/BucketList/assets/119720123/e0b73b6d-2c67-4548-a734-44814c854035">
-<img width="400" alt="Explore_fun" src="https://github.com/JESin10/BucketList/assets/119720123/f6c48b5f-6ea5-4b59-b822-72270eaeb67b">
-<img width="400" alt="Explore_tr" src="https://github.com/JESin10/BucketList/assets/119720123/48582d9c-dbf8-40c7-b661-c05c3935822e">
+<img width="25%" alt="main" src="https://github.com/JESin10/BucketList/assets/119720123/35357c84-130d-43b4-afe4-fb74fde73215">
+<img width="25%" alt="main_2" src="https://github.com/JESin10/BucketList/assets/119720123/36203109-edf0-4bf8-ad52-1255f318632e">
+<img width="25%" alt="Dashboard_all" src="https://github.com/JESin10/BucketList/assets/119720123/7dd22b21-44b9-43ad-ae23-c2649e2730bc">
+<img width="25%" alt="Dashboard_tr" src="https://github.com/JESin10/BucketList/assets/119720123/e0b73b6d-2c67-4548-a734-44814c854035">
+<img width="25%" alt="Explore_fun" src="https://github.com/JESin10/BucketList/assets/119720123/f6c48b5f-6ea5-4b59-b822-72270eaeb67b">
+<img width="25%" alt="Explore_tr" src="https://github.com/JESin10/BucketList/assets/119720123/48582d9c-dbf8-40c7-b661-c05c3935822e">
 
 
 
