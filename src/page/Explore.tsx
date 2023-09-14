@@ -1,12 +1,6 @@
 import React, { useEffect, useId, useState } from "react";
 import { categories } from "../assets/utils";
-import {
-  Firestore,
-  collection,
-  getDocs,
-  query,
-  where,
-} from "@firebase/firestore";
+import { Firestore, collection, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../Firebase";
 import { useAuth } from "../context/AuthContext";
 import tw from "tailwind-styled-components";
@@ -43,17 +37,12 @@ export default function Explore() {
     fetchIdeas(tag);
   }, [tag]);
 
-  console.log(tag, buckets);
-
   return (
     <div>
       <CategoryContainer>
         {categories.map((category) => {
           return (
-            <CategoryDiv
-              key={category.title}
-              onClick={() => fetchIdeas(category.title)}
-            >
+            <CategoryDiv key={category.title} onClick={() => fetchIdeas(category.title)}>
               <CategoryImg src={category.img} alt="category_img" />
               <CategoryTitle>{category.title}</CategoryTitle>
             </CategoryDiv>
@@ -66,9 +55,7 @@ export default function Explore() {
       <BucketListContainerDiv>
         {buckets &&
           buckets.map((bucket) => {
-            return (
-              <BucketListDiv key={bucket.id}>{bucket.title}</BucketListDiv>
-            );
+            return <BucketListDiv key={bucket.id}>{bucket.title}</BucketListDiv>;
           })}
       </BucketListContainerDiv>
     </div>
