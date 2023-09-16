@@ -2,7 +2,7 @@
 
 23.08.30 - 23.09.06
 
-링크바로가기 : <https://bucketcheckit.vercel.app>
+링크바로가기 : [🪣 BucketCheckit](https://bucketcheckit.vercel.app)
 
 <details><summary> test-account </summary> 
  ID : test1@gmail.com
